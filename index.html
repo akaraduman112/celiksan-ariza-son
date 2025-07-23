@@ -1,0 +1,443 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Çeliksan Pompa Arıza Tespit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 10px;
+      background: #fff;
+      border-bottom: 3px solid #b30000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .logo-left img, .logo-right img {
+      height: 100px;
+      border-radius: 10px;
+      background: #fff;
+      padding: 4px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .title-section {
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      color: #b30000;
+      margin: 0;
+    }
+
+    .title-section h2 {
+      font-size: 1.2rem;
+      color: #444;
+      margin: 8px 0 0 0;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: all 0.6s ease;
+    }
+
+    .card h3 {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .hidden {
+      display: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      color: #555;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .reset-link {
+        font-size: 0.9rem;
+        color: #555;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-top: 4px;
+    }
+
+    .answer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #b30000, #e60000);
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-weight: 600;
+}
+
+.answer-btn:hover {
+  background: linear-gradient(135deg, #990000, #cc0000);
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.answer-btn span {
+  font-size: 1.2rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: all 0.6s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card.anim-out {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.card.anim-in {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.card.visible.anim-in-active {
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+      padding: 10px 15px;
+      background: #b30000;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .answer-btn:hover {
+      background: #990000;
+    }
+
+    @media (max-width: 700px) {
+      .logo-left img, .logo-right img {
+        height: 70px;
+      }
+      .title-section h1 {
+        font-size: 1.5rem;
+      }
+      .title-section h2 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-left">
+      <img src="https://s.ankara.bel.tr/files/2022/11/24/6e7ea7997a234e3b8089fd0779c5e1e6.jpeg" alt="ABB" />
+    </div>
+    <div class="title-section">
+      <h1>ANKARA İTFAİYESİ</h1>
+      <h2>ÇELİKSAN POMPA ARIZA TESPİT</h2>
+    </div>
+    <div class="logo-right">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Emblem_of_Turkish_Firefighters.svg/640px-Emblem_of_Turkish_Firefighters.svg.png" alt="İTFAİYE" />
+    </div>
+  </header>
+
+  <main>
+    
+    <div id="step1" class="card visible">
+      <h3>Pompa su veriyor mu?</h3>
+      <div class="answers">
+        <button class="answer-btn" onclick="goToStep('step2', 'step1')">Evet</span>
+        <button class="answer-btn" onclick="goToStep('step3', 'step1')">Hayır</span>
+      </div>
+    </div>
+    
+    <div id="step2" class="card hidden">
+      <h3>Su basıncı yeterli mi?</h3>
+      <div class="answers">
+        <button class="answer-btn" onclick="goToStep('step4', 'step2')">Evet</span>
+        <button class="answer-btn" onclick="goToStep('step5', 'step2')">Hayır</span>
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step3" class="card hidden">
+      <h3>PTO devrede mi?</h3>
+      <div class="answers">
+        <button class="answer-btn" onclick="goToStep('step5', 'step3')"><span>✔</span> Evet</button>
+        <button class="answer-btn" onclick="goToStep('step10', 'step3')"><span>✖</span> Hayır</button>
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step4" class="card hidden">
+      <h3>Harika, her şey yolunda!</h3>
+      <div class="answers">
+        
+        
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step5" class="card hidden">
+      <h3>Ana vana açık mı?</h3>
+      <div class="answers">
+        <button class="answer-btn" onclick="goToStep('step8', 'step5')"><span>✔</span> Evet</button>
+        <button class="answer-btn" onclick="goToStep('step6', 'step5')"><span>✖</span> Hayır</button>
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step6" class="card hidden">
+      <h3>Ana vana düğmesine basılır.</h3>
+      <div class="answers">
+        
+        
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step7" class="card hidden">
+      <h3>Ana vana açık mı?</h3>
+      <div class="answers">
+        <button class="answer-btn" onclick="goToStep('step15', 'step7')"><span>✔</span> Evet</button>
+        <button class="answer-btn" onclick="goToStep('step9', 'step7')"><span>✖</span> Hayır</button>
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step8" class="card hidden">
+      <h3>Gaz + düğmesi ile motor devrini yükseltelim.
+Sorun düzelmediyse su tankının dolu olduğundan emin olalım.</h3>
+      <div class="answers">
+        
+        
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step9" class="card hidden">
+      <h3>Ana vana düğmesine basılır.</h3>
+      <div class="answers">
+        
+        
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step10" class="card hidden">
+      <h3>Sistem tuşu açık mı?</h3>
+      <div class="answers">
+        <button class="answer-btn" onclick="goToStep('step11', 'step10')"><span>✔</span> Evet</button>
+        <button class="answer-btn" onclick="goToStep('step14', 'step10')"><span>✖</span> Hayır</button>
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step11" class="card hidden">
+      <h3>Vites boşa (N) alınıp el freni (imdat) çekildi mi?</h3>
+      <div class="answers">
+        <button class="answer-btn" onclick="goToStep('step12', 'step11')"><span>✔</span> Evet</button>
+        <button class="answer-btn" onclick="goToStep('step13', 'step11')"><span>✖</span> Hayır</button>
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step12" class="card hidden">
+      <h3>Araç içerisinden pompa devreye alınmalıdır.</h3>
+      <div class="answers">
+        
+        
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step13" class="card hidden">
+      <h3>PTO devreye girmesi için vites boşa alınıp (N) el freni (imdat) çekilmelidir.</h3>
+      <div class="answers">
+        
+        
+     </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step14" class="card hidden">
+      <h3>Araç içerisindeki pano üzerinden sistem tuşu aktif edilir.</h3>
+      <div class="answers">
+        
+        
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+    <div id="step15" class="card hidden">
+      <h3>Su tankının dolu olduğundan emin olalım.</h3>
+      <div class="answers">
+        
+        
+      </div>
+      <div class="nav-links" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="back-link" onclick="goBack()">← Geri</span>
+        <span class="reset-link" onclick="goToStart()">Başa Dön</span>
+      </div>
+    </div>
+    
+  </main>
+
+  <script>
+  let historyStack = [];
+
+  function goToStep(showId, hideId) {
+    if (!showId) return;
+
+    const hideCard = document.getElementById(hideId);
+    const showCard = document.getElementById(showId);
+
+    historyStack.push(hideId);
+
+    hideCard.classList.remove("visible");
+    hideCard.classList.add("hidden");
+
+    showCard.classList.remove("hidden");
+    showCard.classList.add("visible", "anim-in", "anim-in-active");
+
+    setTimeout(() => {
+      showCard.classList.remove("anim-in", "anim-in-active");
+    }, 500);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack() {
+    if (historyStack.length === 0) return;
+    const currentId = document.querySelector('.card.visible').id;
+    const previousId = historyStack.pop();
+
+    document.getElementById(currentId).classList.remove("visible");
+    document.getElementById(currentId).classList.add("hidden");
+
+    const prevCard = document.getElementById(previousId);
+    prevCard.classList.remove("hidden");
+    prevCard.classList.add("visible");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goToStart() {
+    const currentId = document.querySelector('.card.visible').id;
+    document.getElementById(currentId).classList.remove("visible");
+    document.getElementById(currentId).classList.add("hidden");
+
+    const firstCard = document.getElementById('step1');
+    firstCard.classList.remove("hidden");
+    firstCard.classList.add("visible");
+    historyStack = [];
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+
+</body>
+</html>
